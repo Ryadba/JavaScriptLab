@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Club Membership</title>
+
+    <style>
+        input {
+            width: 100%;
+            padding: 5px;
+            margin: 5px 5px 5px 0px;
+            box-sizing: border-box;
+
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <h1>Student Club Roster</h1>
+
+    <h2>Add Students</h2>
+
+    <label for="student-name">Student Name</label><input id="student-name" name="student-name">
+    <br>
+    <label for="student-id">Student ID</label><input id="student-id" name="student-id">
+    <br>
+    <label for="student-gpa">Student GPA</label><input id="student-gpa" name="student-gpa" type="number">
+    <br>
+    <button id="add-student">Add Student</button>
+
+    <h2>Student List</h2>
+
+    <p>There are
+        <span id="student-count">
+            <!-- use JavaScript to count the number of students, and show here -->
+        </span>
+        student(s) in the club.
+    </p>
+
+    <ul id="student-list">
+        <!-- use JavaScript to create li elements  -->
+    </ul>
+
+    <script>
+
+        /* Add the following functionality to this page
+      
+        [Note on HTML element notation: span#student-count means the span element with id="student-count" ]
+      
+        When the page loads:
+            * Using JavaScript, display 0 in the span#student-count  (1pt) */
+
+        // Select the span element with id="student-count"
+        let countSpan = document.querySelector('#student-count')
+
+        // Initialize the student count to 0
+
+        let studentCount = 0
+
+        // Display the count on the page
+        countSpan.innerHTML = studentCount;
+
+
+
+        /* Add an event listener so that when button#add-students is clicked:*/
+        let addButton = document.querySelector('#add-student');
+
+        /*- Read the value from the student-name input, save in a variable. If the name is not entered, show an alert error message and return. (1pt)
+        - Read the value from the student-id input, save in a variable. If the id is not entered, show an alert error message and return. (1pt)
+        - Read the value from the student-gpa input, save in a variable. If the GPA is not entered, or is not in the range 0-4, show an alert error message and return.  (1pt)
+        - Create a new li element (1pt) */
+        let nameInput = document.querySelector('#student-name');
+        let idInput = document.querySelector('#student-id');
+        let gpaInput = document.querySelector('#student-gpa');
+        let studentList = document.querySelector('#student-list');
+
+        addButton.addEventListener('click', function() {
+            
+            // Read & validate the student name
+            let studentName = nameInput.value
+            if (studentName === "") {
+                alert("Error - Please enter a valid student name");
+                return;
+            }
+
+            // Read & validate the student ID
+            let studentId = idInput.value.trim();
+            if (studentId === "") {
+                alert("Error - Please enter a valid student ID.");
+                return;
+            }
+
+            // Read & validate the student GPA (between 0 and 4)
+            let studentGpaText = gpaInput.value
+            if (studentGpaText === "") {
+                alert("Error - Please enter a valid GPA.");
+                return;
+            }
+            
+            let studentGpa = Number(studentGpaText);
+            if (studentGpa < 0 || studentGpa > 4) {
+                alert("Error -The GPA must be a number between 0 and 4");
+                return;
+            }
+
+            // Create a new li element
+            let newLi = document.createElement('li');
+
+            // Set innerHTML using a template string matching the required example format
+            newLi.innerHTML = `Name: ${studentName}, id: ${studentId}, GPA: ${studentGpa}`;
+
+            // Add the new li element to ul#student-list
+            studentList.append(newLi);
+
+            // Clear the values of all the three input elements
+            nameInput.value = "";
+            idInput.value = "";
+            gpaInput.value = "";
+
+            // Update the span#student-count value to the new number of students
+            studentCount++;
+            countSpan.innerHTML = studentCount;
+        });
+
+    </script>
+
+</body>
+
+</html>
