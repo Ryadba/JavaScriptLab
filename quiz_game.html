@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title></title>
+</head>
+
+<body>
+
+    <p>What is the Capital of Minnesota!</p>
+
+    <button class="wrong-answer">Minneapolis</button>
+    <button id="correct-answer">Saint Paul</button>
+    <button class="wrong-answer">Duluth</button>
+
+    <p id="result"></p>
+
+    <script>
+
+        let correctAnswerButton = document.querySelector('#correct-answer')
+
+        let defaultButtonColor = correctAnswerButton.style.background
+
+        let result = document.querySelector('#result')
+
+        let wrongAnswerButtons = document.querySelectorAll('.wrong-answer')
+
+        // add event listener to all of the wrong answers buttons
+
+        wrongAnswerButtons.forEach(function (wrongAnswerButtons) { // loop -repeats for each element in the wrongAnswerButtons nodelist
+            // add click event listener to the wrongAnswerButtons
+            wrongAnswerButtons.addEventListener('click', function () {
+                result.innerHTML = "Wrong Answer, try again! " // displayed text after click
+                correctAnswerButton.style.background = defaultButtonColor
+            })
+
+        })
+
+        // add event listener to the correct answer button and highligh the button in skyblue color
+
+        correctAnswerButton.addEventListener('click', function () {
+            result.innerHTML = "Correct Answer!" //displayed text after click
+            correctAnswerButton.style.background = 'skyblue' //button skyblue color after click
+        })
+
+    </script>
+
+</body>
+
+</html>
